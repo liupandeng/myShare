@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Simple Shapes</title>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <script type="text/javascript" src="d3.js"></script>
+</head>
+<style type="text/css">
+    .node {
+        stroke: #fff;
+        stroke-width: 1.5px;
+        cursor:pointer;
+    }
+
+    .nodetext {
+        fill: #000;
+        font-size:12px;
+        cursor:pointer;
+        pointer-events:none;
+    }
+</style>
+<body>
+<script type="text/javascript">
+var data = [4, 8, 15, 16, 23, 42, 12];
+
+var x = d3.scale.linear()
+.domain([0, d3.max(data)])
+.range([0, 420]);
+
+d3.select(".chart")
+.selectAll("div")
+.data(data)
+.enter().append("div")
+.style("width", function(d) { return x(d) + "px"; })
+.text(function(d) { return d; });
+</script>
+</body>
+</html>

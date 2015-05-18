@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>画一个力学图(Force)</title>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<style type="text/css">
+    svg line{
+        stroke: grey;
+        stroke-width: 2;
+    }
+    .node {
+        stroke: #fff;
+        stroke-width: 1.5px;
+        cursor:pointer;
+    }
+
+    .nodetext {
+        fill: #000;
+        font-size:12px;
+        cursor:pointer;
+        pointer-events:none;
+    }
+</style>
+<body>
+<script type="text/javascript">
+
+var w1 = 500;
+var h1 = 500;
+var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w1)          //设置宽度
+            .attr("height", h1);        //设置高度
+//var drag=d3.behavior.drag()
+//        .on("drag",move);
+
+//var dataset = [ 5, 10, 15, 20, 25 ];
+
+var dataset = [ 5, 5, 5, 5, 5 ];
+var circles = svg.selectAll("circle")
+                    .data(dataset)
+                    .enter()
+                    .append("circle");            //  cx 圆心x坐标  cy圆心y坐标   r半径
+             circles.attr("cx", function(d, i) {//圆心坐标从左向右依次递增，注意：i表示引入
+                                                // 数据在数组的下标，如：d=5,i=0
+                        return (i * 50) + 25;
+                })
+                    .attr("cy", h1/2) //将圆心放到svg高度中间
+                    .attr("r", function(d) {//半径
+                    return d;
+                })
+
+                    .attr("fill", "yellow")         //给各圆填充//黄色
+                    .attr("stroke", "orange")       //给各圆边涂成橘黄
+                    .attr("stroke-width", function(d) { //按比例设置边的厚度
+                        return d/2;
+                    });
+
+
+svg.append("line") // <-A
+        .attr("x1", 25)
+        .attr("y1", 250)
+        .attr("x2", 75)
+        .attr("y2", 250);
+
+</script>
+</body>
+</html>
